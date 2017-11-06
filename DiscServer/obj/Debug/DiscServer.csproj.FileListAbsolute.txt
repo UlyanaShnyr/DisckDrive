@@ -1,0 +1,16 @@
+C:\Users\User\source\repos\DiskClient\DiscServer\bin\Debug\DiscServer.exe.config
+C:\Users\User\source\repos\DiskClient\DiscServer\bin\Debug\DiscServer.exe
+C:\Users\User\source\repos\DiskClient\DiscServer\bin\Debug\DiscServer.pdb
+C:\Users\User\source\repos\DiskClient\DiscServer\obj\Debug\DiscServer.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\DiskClient\DiscServer\obj\Debug\DiscServer.exe
+C:\Users\User\source\repos\DiskClient\DiscServer\obj\Debug\DiscServer.pdb
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\bin\Debug\DiscServer.exe.config
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\bin\Debug\DiscServer.exe
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\bin\Debug\DiscServer.pdb
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\bin\Debug\WcfService1.dll
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\bin\Debug\WcfService1.pdb
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\bin\Debug\WcfService1.dll.config
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\obj\Debug\DiscServer.csprojResolveAssemblyReference.cache
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\obj\Debug\DiscServer.csproj.CoreCompileInputs.cache
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\obj\Debug\DiscServer.exe
+C:\Users\s25-r1\Desktop\DiskClient\DiscServer\obj\Debug\DiscServer.pdb

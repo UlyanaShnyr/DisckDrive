@@ -1,0 +1,13 @@
+C:\Users\User\source\repos\DiskClient\WcfService1\bin\WcfService1.dll.config
+C:\Users\User\source\repos\DiskClient\WcfService1\bin\WcfService1.dll
+C:\Users\User\source\repos\DiskClient\WcfService1\bin\WcfService1.pdb
+C:\Users\User\source\repos\DiskClient\WcfService1\obj\Debug\WcfService1.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\DiskClient\WcfService1\obj\Debug\WcfService1.dll
+C:\Users\User\source\repos\DiskClient\WcfService1\obj\Debug\WcfService1.pdb
+C:\Users\User\source\repos\DiskClient\WcfService1\obj\Debug\WcfService1.csprojResolveAssemblyReference.cache
+C:\Users\s25-r1\Desktop\DiskClient\WcfService1\bin\WcfService1.dll.config
+C:\Users\s25-r1\Desktop\DiskClient\WcfService1\bin\WcfService1.dll
+C:\Users\s25-r1\Desktop\DiskClient\WcfService1\bin\WcfService1.pdb
+C:\Users\s25-r1\Desktop\DiskClient\WcfService1\obj\Debug\WcfService1.csproj.CoreCompileInputs.cache
+C:\Users\s25-r1\Desktop\DiskClient\WcfService1\obj\Debug\WcfService1.dll
+C:\Users\s25-r1\Desktop\DiskClient\WcfService1\obj\Debug\WcfService1.pdb
