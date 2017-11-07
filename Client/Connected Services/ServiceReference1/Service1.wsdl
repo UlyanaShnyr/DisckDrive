@@ -32,6 +32,24 @@
   <wsdl:message name="IService1_CreateFolder_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateFolderResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_CreateFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFile" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CreateFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Rename_InputMessage">
+    <wsdl:part name="parameters" element="tns:Rename" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Rename_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RenameResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="Upload">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/Upload" message="tns:IService1_Upload_InputMessage" />
@@ -48,6 +66,18 @@
     <wsdl:operation name="CreateFolder">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateFolder" message="tns:IService1_CreateFolder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateFolderResponse" message="tns:IService1_CreateFolder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CreateFile" message="tns:IService1_CreateFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CreateFileResponse" message="tns:IService1_CreateFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Delete" message="tns:IService1_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteResponse" message="tns:IService1_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Rename">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Rename" message="tns:IService1_Rename_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RenameResponse" message="tns:IService1_Rename_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -81,6 +111,33 @@
     </wsdl:operation>
     <wsdl:operation name="CreateFolder">
       <soap:operation soapAction="http://tempuri.org/IService1/CreateFolder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFile">
+      <soap:operation soapAction="http://tempuri.org/IService1/CreateFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/IService1/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Rename">
+      <soap:operation soapAction="http://tempuri.org/IService1/Rename" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

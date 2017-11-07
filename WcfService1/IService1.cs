@@ -23,5 +23,14 @@ namespace WcfService1
 
         [OperationContract]
         string CreateFolder (string path);
+
+        [OperationContract]
+        string CreateFile(string path);
+
+        [OperationContract]
+        string Delete(string path);
+
+        [OperationContract]
+        string Rename(string old_path, string new_path);
     }
 }

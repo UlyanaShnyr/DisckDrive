@@ -26,6 +26,36 @@ namespace WcfService1.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Download", ReplyAction="http://tempuri.org/IService1/DownloadResponse")]
         System.Threading.Tasks.Task<System.IO.Stream> DownloadAsync(string file);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ReadAll", ReplyAction="http://tempuri.org/IService1/ReadAllResponse")]
+        string[] ReadAll(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ReadAll", ReplyAction="http://tempuri.org/IService1/ReadAllResponse")]
+        System.Threading.Tasks.Task<string[]> ReadAllAsync(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateFolder", ReplyAction="http://tempuri.org/IService1/CreateFolderResponse")]
+        string CreateFolder(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateFolder", ReplyAction="http://tempuri.org/IService1/CreateFolderResponse")]
+        System.Threading.Tasks.Task<string> CreateFolderAsync(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateFile", ReplyAction="http://tempuri.org/IService1/CreateFileResponse")]
+        string CreateFile(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/CreateFile", ReplyAction="http://tempuri.org/IService1/CreateFileResponse")]
+        System.Threading.Tasks.Task<string> CreateFileAsync(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Delete", ReplyAction="http://tempuri.org/IService1/DeleteResponse")]
+        string Delete(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Delete", ReplyAction="http://tempuri.org/IService1/DeleteResponse")]
+        System.Threading.Tasks.Task<string> DeleteAsync(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Rename", ReplyAction="http://tempuri.org/IService1/RenameResponse")]
+        string Rename(string old_path, string new_path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Rename", ReplyAction="http://tempuri.org/IService1/RenameResponse")]
+        System.Threading.Tasks.Task<string> RenameAsync(string old_path, string new_path);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +99,46 @@ namespace WcfService1.Proxy {
         
         public System.Threading.Tasks.Task<System.IO.Stream> DownloadAsync(string file) {
             return base.Channel.DownloadAsync(file);
+        }
+        
+        public string[] ReadAll(string path) {
+            return base.Channel.ReadAll(path);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> ReadAllAsync(string path) {
+            return base.Channel.ReadAllAsync(path);
+        }
+        
+        public string CreateFolder(string path) {
+            return base.Channel.CreateFolder(path);
+        }
+        
+        public System.Threading.Tasks.Task<string> CreateFolderAsync(string path) {
+            return base.Channel.CreateFolderAsync(path);
+        }
+        
+        public string CreateFile(string path) {
+            return base.Channel.CreateFile(path);
+        }
+        
+        public System.Threading.Tasks.Task<string> CreateFileAsync(string path) {
+            return base.Channel.CreateFileAsync(path);
+        }
+        
+        public string Delete(string path) {
+            return base.Channel.Delete(path);
+        }
+        
+        public System.Threading.Tasks.Task<string> DeleteAsync(string path) {
+            return base.Channel.DeleteAsync(path);
+        }
+        
+        public string Rename(string old_path, string new_path) {
+            return base.Channel.Rename(old_path, new_path);
+        }
+        
+        public System.Threading.Tasks.Task<string> RenameAsync(string old_path, string new_path) {
+            return base.Channel.RenameAsync(old_path, new_path);
         }
     }
 }

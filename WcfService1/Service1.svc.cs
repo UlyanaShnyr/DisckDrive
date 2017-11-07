@@ -14,7 +14,8 @@ namespace WcfService1
 
     public class Service1 : IService1
     {
-        string path = @"D:\root";
+        string basePath = @"D:\root\Server\";
+
         public Stream Download(string file)
         {
             MemoryStream stream = new MemoryStream();
@@ -24,17 +25,17 @@ namespace WcfService1
             return stream;
         }
 
-        public string[] ReadAll(string path)
+        public string[] ReadAll(string basePath)
         {
-            List<string> str =  Directory.GetDirectories(path).ToList();
-            str.AddRange(Directory.GetFiles(path));
+            List<string> str =  Directory.GetDirectories(basePath).ToList();
+            str.AddRange(Directory.GetFiles(basePath));
             return str.ToArray();
             
         }
 
         public string Upload(Stream input)
         {
-            string fileName = String.Format(@"{0}\{1}.txt", path, Guid.NewGuid().ToString());
+            string fileName = String.Format(@"{0}\{1}.txt", basePath, Guid.NewGuid().ToString());
             StreamReader reader = new StreamReader(input);
             var content = reader.ReadToEnd();
             File.WriteAllText(fileName, content);
@@ -42,14 +43,35 @@ namespace WcfService1
             
         }
 
-        public string CreateFolder (string path) { 
-            DirectoryInfo dirInfo = new DirectoryInfo(path);
+        public string CreateFolder (string basePath) { 
+          
+            DirectoryInfo dirInfo = new DirectoryInfo(this.basePath + basePath);
             if (!dirInfo.Exists)
             {
                 dirInfo.Create();
             }
-            return path;
+            return basePath;
         }
 
+        public string CreateFile(string basePath)
+        {
+            File.Create(this.basePath+ basePath);
+            return this.basePath + basePath;
+        }
+
+        public string Delete(string basePath)
+        {
+            if (Directory.Exists(this.basePath + basePath))
+            {                     
+                Directory.Delete(this.basePath + basePath);
+            }
+            return basePath;
+        }
+
+        public string Rename(string old_path, string new_path)
+        {
+            Directory.Move(basePath+old_path, basePath+new_path);
+            return new_path;
+        }
     }
     }
