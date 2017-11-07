@@ -43,9 +43,10 @@ namespace WcfService1
             
         }
 
-        public string CreateFolder (string basePath) { 
-          
-            DirectoryInfo dirInfo = new DirectoryInfo(this.basePath + basePath);
+        public string CreateFolder (string basePath) {
+
+            string path = this.basePath + basePath;
+            DirectoryInfo dirInfo = new DirectoryInfo(path);
             if (!dirInfo.Exists)
             {
                 dirInfo.Create();
@@ -55,8 +56,7 @@ namespace WcfService1
 
         public string CreateFile(string basePath)
         {
-            File.Create(this.basePath+ basePath);
-            return this.basePath + basePath;
+            return "";
         }
 
         public string Delete(string basePath)
@@ -70,8 +70,16 @@ namespace WcfService1
 
         public string Rename(string old_path, string new_path)
         {
-            Directory.Move(basePath+old_path, basePath+new_path);
-            return new_path;
+            if (Directory.Exists(basePath + old_path))
+            {
+                Directory.Move(basePath + old_path, basePath + new_path);
+                return new_path;
+            }
+            else
+            {
+                File.Move(basePath + old_path, basePath + new_path);
+                return new_path;
+            }
         }
     }
     }

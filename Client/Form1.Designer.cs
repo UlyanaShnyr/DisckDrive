@@ -46,7 +46,7 @@
             this.buttonCreateFile.TabIndex = 0;
             this.buttonCreateFile.Text = "CreateFile";
             this.buttonCreateFile.UseVisualStyleBackColor = true;
-            this.buttonCreateFile.Click += new System.EventHandler(this.buttonCreateFile_Click);
+            this.buttonCreateFile.Click += new System.EventHandler(this.addFileMenuItem_Click);
             // 
             // buttonDelete
             // 
@@ -56,7 +56,7 @@
             this.buttonDelete.TabIndex = 3;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.deleteMenuItem_Click);
             // 
             // button1CreateFolder
             // 
@@ -66,7 +66,7 @@
             this.button1CreateFolder.TabIndex = 4;
             this.button1CreateFolder.Text = "CreateFolder";
             this.button1CreateFolder.UseVisualStyleBackColor = true;
-            this.button1CreateFolder.Click += new System.EventHandler(this.button1CreateFolder_Click);
+            this.button1CreateFolder.Click += new System.EventHandler(this.addFolderMenuItem_Click);
             // 
             // listView1
             // 

@@ -54,7 +54,7 @@ namespace Client
         {
             
             var path =currentPath+"\\"+ listView1.SelectedItems[0].Text;
-            MessageBox.Show(path);
+            MessageBox.Show(path.Remove(0, currentPath.Length));
             client.Delete(path.Remove(0, currentPath.Length));
                 Directory.Delete(currentPath+"\\"+ listView1.SelectedItems[0].Text);
                 SetListView(currentPath);
@@ -62,18 +62,18 @@ namespace Client
 
 
         void addFolderMenuItem_Click(object sender, EventArgs e)
-        {
-           
+        {           
             string path = Path.GetRandomFileName();
-            Directory.CreateDirectory(currentPath + "/" + path);
+            Directory.CreateDirectory(currentPath + "\\" + path);
             SetListView(currentPath);
-            //client.CreateFolder(basePath+"/test3");
-            //SetListView(basePath);
-            int index = -1;
+                        int index = -1;
             for (var item = 0; item < listView1.Items.Count; item++)
             {
-                if (listView1.Items[item].Text == path) index = item;
-                client.CreateFolder(listView1.Items[item].ToString());
+                if (listView1.Items[item].Text == path)
+                {
+                    index = item;
+                    client.CreateFolder(currentPath.Remove(0, basePath.Length) + "\\" + listView1.Items[item].Text);
+                }
             }
             if (index != -1)
                 listView1.Items[index].BeginEdit();
@@ -88,8 +88,11 @@ namespace Client
             int index = -1;
             for (var item = 0; item < listView1.Items.Count; item++)
             {
-                if (listView1.Items[item].Text == path) index = item;
-                client.CreateFile(listView1.Items[item].ToString());
+                if (listView1.Items[item].Text == path)
+                {
+                    index = item;
+                    client.CreateFile(currentPath.Remove(0, basePath.Length) + "\\" + listView1.Items[item].Text);
+                }
             }
             if (index != -1)
                 listView1.Items[index].BeginEdit();
@@ -141,9 +144,13 @@ namespace Client
             if (e.Label == null) { return; }
             if (Directory.Exists(path))
             {
-                client.Rename(listView1.SelectedItems[0].ToString().Remove(0, basePath.Length), (currentPath + "\\" + e.Label).Remove(0, basePath.Length));
-                Directory.Move(path, currentPath + "\\" + e.Label);               
+                Directory.Move(path, currentPath + "\\" + e.Label);
             }
+            else
+            {
+                File.Move(path, currentPath + "\\" + e.Label);
+            }
+            client.Rename(path.Remove(0, basePath.Length), (currentPath + "\\" + e.Label).Remove(0, basePath.Length));
         }
 
         private void buttonCreateFile_Click(object sender, EventArgs e)
@@ -155,7 +162,7 @@ namespace Client
             for (var item = 0; item < listView1.Items.Count; item++)
             {
                 if (listView1.Items[item].Text == path) index = item;
-                client.CreateFile(listView1.Items[item].ToString());
+                client.CreateFile(listView1.Items[item].Text);
             }
             if (index != -1)
                 listView1.Items[index].BeginEdit();
@@ -171,7 +178,7 @@ namespace Client
             for (var item = 0; item < listView1.Items.Count; item++)
             {
                 if (listView1.Items[item].Text == path) index = item;
-                client.CreateFolder(listView1.Items[item].ToString());
+                client.CreateFolder(listView1.Items[item].Text);
             }
             if (index != -1)
                 listView1.Items[index].BeginEdit();
@@ -180,14 +187,15 @@ namespace Client
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            client.Delete(listView1.SelectedItems[0].ToString().Remove(0, currentPath.Length));
+            client.Delete(listView1.SelectedItems[0].Text.Remove(0, currentPath.Length));
             Directory.Delete(currentPath + "/" + listView1.SelectedItems[0].Text);
             SetListView(currentPath);
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            SetListView(basePath);
+            if(currentPath!=basePath)
+            SetListView(Path.GetDirectoryName(currentPath));
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
