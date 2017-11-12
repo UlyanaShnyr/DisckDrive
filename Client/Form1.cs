@@ -42,6 +42,7 @@ namespace Client
             deleteMenuItem.Click += deleteMenuItem_Click;
             addFolderMenuItem.Click += addFolderMenuItem_Click;
             addFileMenuItem.Click += addFileMenuItem_Click;
+<<<<<<< HEAD
             SyncFolder();
         }
 
@@ -73,6 +74,34 @@ namespace Client
                 GetAllFolders(Directory.GetDirectories(path)[i], all);
             }
         }
+=======
+
+          //  CheckChange(basePath);
+        }
+
+        void CheckChange(string path)
+        {
+           // Create a new FileSystemWatcher and set its properties.
+            FileSystemWatcher watch = new FileSystemWatcher();
+            watch.Path = Path.GetDirectoryName(basePath);
+            /* Watch for changes in LastAccess and LastWrite times, and
+          the renaming of files or directories. */
+            watch.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
+           | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+            watch.Filter = "";
+
+            // Add event handlers.
+            watch.Changed += new FileSystemEventHandler(OnChanged);
+
+        }
+
+        private static void OnChanged(object source, FileSystemEventArgs e)
+        {
+            WatcherChangeTypes wct = e.ChangeType;
+            MessageBox.Show(wct.ToString());
+        }
+
+>>>>>>> e5ce0c57dc07e53923712ca9d5dc1dbce284875b
 
 
         void renameMenuItem_Click(object sender, EventArgs e)
@@ -231,6 +260,11 @@ namespace Client
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }

@@ -20,7 +20,6 @@ C:\Users\user\Desktop\DisckDrive\Client\obj\Debug\Client.pdb
 C:\Users\s25-r1\Desktop\DisckDrive\Client\bin\Debug\Client.exe.config
 C:\Users\s25-r1\Desktop\DisckDrive\Client\bin\Debug\Client.exe
 C:\Users\s25-r1\Desktop\DisckDrive\Client\bin\Debug\Client.pdb
-C:\Users\s25-r1\Desktop\DisckDrive\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
 C:\Users\s25-r1\Desktop\DisckDrive\Client\obj\Debug\Client.Form1.resources
 C:\Users\s25-r1\Desktop\DisckDrive\Client\obj\Debug\Client.Properties.Resources.resources
 C:\Users\s25-r1\Desktop\DisckDrive\Client\obj\Debug\Client.csproj.GenerateResource.Cache
