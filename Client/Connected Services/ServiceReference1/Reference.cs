@@ -56,6 +56,18 @@ namespace Client.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Rename", ReplyAction="http://tempuri.org/IService1/RenameResponse")]
         System.Threading.Tasks.Task<string> RenameAsync(string old_path, string new_path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchFiles", ReplyAction="http://tempuri.org/IService1/SearchFilesResponse")]
+        string[] SearchFiles(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchFiles", ReplyAction="http://tempuri.org/IService1/SearchFilesResponse")]
+        System.Threading.Tasks.Task<string[]> SearchFilesAsync(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SerchDirectories", ReplyAction="http://tempuri.org/IService1/SerchDirectoriesResponse")]
+        string[] SerchDirectories();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SerchDirectories", ReplyAction="http://tempuri.org/IService1/SerchDirectoriesResponse")]
+        System.Threading.Tasks.Task<string[]> SerchDirectoriesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -139,6 +151,22 @@ namespace Client.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> RenameAsync(string old_path, string new_path) {
             return base.Channel.RenameAsync(old_path, new_path);
+        }
+        
+        public string[] SearchFiles(string path) {
+            return base.Channel.SearchFiles(path);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> SearchFilesAsync(string path) {
+            return base.Channel.SearchFilesAsync(path);
+        }
+        
+        public string[] SerchDirectories() {
+            return base.Channel.SerchDirectories();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> SerchDirectoriesAsync() {
+            return base.Channel.SerchDirectoriesAsync();
         }
     }
 }

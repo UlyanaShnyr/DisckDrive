@@ -50,6 +50,18 @@
   <wsdl:message name="IService1_Rename_OutputMessage">
     <wsdl:part name="parameters" element="tns:RenameResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SearchFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchFiles" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SerchDirectories_InputMessage">
+    <wsdl:part name="parameters" element="tns:SerchDirectories" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SerchDirectories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SerchDirectoriesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="Upload">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/Upload" message="tns:IService1_Upload_InputMessage" />
@@ -78,6 +90,14 @@
     <wsdl:operation name="Rename">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/Rename" message="tns:IService1_Rename_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/RenameResponse" message="tns:IService1_Rename_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchFiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchFiles" message="tns:IService1_SearchFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchFilesResponse" message="tns:IService1_SearchFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SerchDirectories">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SerchDirectories" message="tns:IService1_SerchDirectories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SerchDirectoriesResponse" message="tns:IService1_SerchDirectories_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -138,6 +158,24 @@
     </wsdl:operation>
     <wsdl:operation name="Rename">
       <soap:operation soapAction="http://tempuri.org/IService1/Rename" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchFiles">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SerchDirectories">
+      <soap:operation soapAction="http://tempuri.org/IService1/SerchDirectories" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -42,7 +42,38 @@ namespace Client
             deleteMenuItem.Click += deleteMenuItem_Click;
             addFolderMenuItem.Click += addFolderMenuItem_Click;
             addFileMenuItem.Click += addFileMenuItem_Click;
+            SyncFolder();
         }
+
+        void SyncFolder()
+        {
+            List<string> all = new List<string>();
+            List<string> serverFolder = client.SerchDirectories().ToList();
+            GetAllFolders(basePath, all);
+
+            for(int i=0; i < serverFolder.Count(); i++)
+            {
+                if (!all.Contains(serverFolder[i]))
+                {
+                    Directory.CreateDirectory(basePath+"\\"+serverFolder[i]);
+                   
+                }
+            }
+
+        }
+
+        public void GetAllFolders(string path,List<string> all)
+        {
+            if (Directory.GetDirectories(path).Length > 0)
+                all.AddRange(Directory.GetDirectories(path.Remove(0, basePath.Length)));
+
+
+            for (int i = 0; i < Directory.GetDirectories(path).Length; i++)
+            {
+                GetAllFolders(Directory.GetDirectories(path)[i], all);
+            }
+        }
+
 
         void renameMenuItem_Click(object sender, EventArgs e)
         {
@@ -167,6 +198,7 @@ namespace Client
             if (index != -1)
                 listView1.Items[index].BeginEdit();
             else MessageBox.Show("Error");
+
         }
 
         private void button1CreateFolder_Click(object sender, EventArgs e)

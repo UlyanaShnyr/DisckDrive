@@ -24,4 +24,3 @@ C:\Users\s25-r1\Desktop\DisckDrive\WcfService1\obj\Debug\WcfService1.csproj.Core
 C:\Users\s25-r1\Desktop\DisckDrive\WcfService1\obj\Debug\WcfService1.dll
 C:\Users\s25-r1\Desktop\DisckDrive\WcfService1\obj\Debug\WcfService1.pdb
 C:\Users\s25-r1\Desktop\DisckDrive\WcfService1\obj\Debug\WcfService1.csprojResolveAssemblyReference.cache
-C:\Users\user\Desktop\DisckDrive\WcfService1\obj\Debug\WcfService1.csprojResolveAssemblyReference.cache

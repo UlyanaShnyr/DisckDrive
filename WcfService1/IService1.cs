@@ -32,5 +32,11 @@ namespace WcfService1
 
         [OperationContract]
         string Rename(string old_path, string new_path);
+
+        [OperationContract]
+        List<string> SearchFiles(string path);
+
+        [OperationContract]
+        List<string> SerchDirectories();
     }
 }

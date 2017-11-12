@@ -27,10 +27,10 @@ namespace WcfService1
 
         public string[] ReadAll(string basePath)
         {
-            List<string> str =  Directory.GetDirectories(basePath).ToList();
+            List<string> str = Directory.GetDirectories(basePath).ToList();
             str.AddRange(Directory.GetFiles(basePath));
             return str.ToArray();
-            
+
         }
 
         public string Upload(Stream input)
@@ -40,10 +40,11 @@ namespace WcfService1
             var content = reader.ReadToEnd();
             File.WriteAllText(fileName, content);
             return fileName;
-            
+
         }
 
-        public string CreateFolder (string basePath) {
+        public string CreateFolder(string basePath)
+        {
 
             string path = this.basePath + basePath;
             DirectoryInfo dirInfo = new DirectoryInfo(path);
@@ -56,13 +57,19 @@ namespace WcfService1
 
         public string CreateFile(string basePath)
         {
-            return "";
+            string path = this.basePath + basePath;
+            FileInfo f = new FileInfo(path);
+            if (!f.Exists)
+            {
+                f.Create();
+            }
+            return basePath;
         }
 
         public string Delete(string basePath)
         {
             if (Directory.Exists(this.basePath + basePath))
-            {                     
+            {
                 Directory.Delete(this.basePath + basePath);
             }
             return basePath;
@@ -81,5 +88,49 @@ namespace WcfService1
                 return new_path;
             }
         }
+
+        public void AllPath(string path, List<string> all)
+        {
+            if (Directory.GetDirectories(path).Length > 0)
+                all.AddRange(Directory.GetDirectories(path));
+
+     
+            
+            for (int i = 0; i < Directory.GetDirectories(path).Length; i++)
+            {
+                AllPath(Directory.GetDirectories(path)[i], all);
+            }
+
+        }
+
+        public List<string> SerchDirectories()
+        {
+            List<string> allDirectories = new List<string>();
+            AllPath(basePath, allDirectories);
+
+            for (int i = 0; i < allDirectories.Count; i++)
+            {
+                allDirectories[i] = allDirectories[i].Remove(0, basePath.Length);
+            }
+
+            return allDirectories;
+        }
+
+        public void AllFilesPath(string path, List<string> allList)
+        {
+            if(Directory.GetFiles(path).Length>0)
+            allList.AddRange(Directory.GetFiles(path.Remove(0,basePath.Length)));
+            for(int i = 0;i < Directory.GetDirectories(path).Length;i++)
+            {
+                AllFilesPath(Directory.GetDirectories(path)[i], allList);
+            }
+        }
+        public List<string> SearchFiles(string path)
+        {
+            List<string> allFiles = new List<string>();
+            AllFilesPath(path, allFiles);
+            return allFiles;
+        }
+
     }
-    }
+}
