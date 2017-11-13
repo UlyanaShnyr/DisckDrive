@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+
 namespace Client
 {
     public partial class logiIn : Form
@@ -26,20 +27,35 @@ namespace Client
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
 
-            SqlConnection con = new SqlConnection(@"Data Source=ULYANA;Initial Catalog=MyDrive;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            SqlDataAdapter adapt = new SqlDataAdapter("Select Count(*) From DataLogin Where Username ='" + textBoxLogin.Text + "' and Password ='" + textBoxPassword.Text + "'", con);
-            DataTable dt = new DataTable();
-            adapt.Fill(dt);
-            if (dt.Rows[0][0].ToString() == "1")
-            {
-                this.Hide();
-                Form1 f1 = new Form1();
-                f1.Show();
-            }
-            else
-            {
-                MessageBox.Show("Please Cheack your Login Name and Password");
-            }
+            //SqlConnection con = new SqlConnection(@"Data Source=ULYANA;Initial Catalog=MyDrive;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            //SqlDataAdapter adapt = new SqlDataAdapter("Select Count(*) From DataLogin Where Username ='" + textBoxLogin.Text + "' and Password ='" + textBoxPassword.Text + "'", con);
+            //DataTable dt = new DataTable();
+            //adapt.Fill(dt);
+            //if (dt.Rows[0][0].ToString() == "1")
+            //{
+            this.Hide();
+            Form1 f1 = new Form1();
+            f1.Show();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Please Cheack your Login Name and Password");
+            //}
+
+
+
+        }
+
+        private void linkLabelGoTotheRegistrationForm_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            Registration reg = new Registration();
+            reg.Show();
+        }
+
+        private void buttonExit_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

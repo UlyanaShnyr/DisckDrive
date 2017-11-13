@@ -14,6 +14,9 @@ namespace WcfService1
     public interface IService1
     {
         [OperationContract]
+        string Regist(User user);
+
+        [OperationContract]
         string Upload(Stream input);
         [OperationContract]
         Stream Download(String file);

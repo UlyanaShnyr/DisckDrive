@@ -42,9 +42,9 @@ namespace Client
             deleteMenuItem.Click += deleteMenuItem_Click;
             addFolderMenuItem.Click += addFolderMenuItem_Click;
             addFileMenuItem.Click += addFileMenuItem_Click;
-<<<<<<< HEAD
+
             SyncFolder();
-        }
+        
 
         void SyncFolder()
         {
@@ -63,10 +63,10 @@ namespace Client
 
         }
 
-        public void GetAllFolders(string path,List<string> all)
+         void GetAllFolders(string path,List<string> all)
         {
             if (Directory.GetDirectories(path).Length > 0)
-                all.AddRange(Directory.GetDirectories(path.Remove(0, basePath.Length)));
+                all.AddRange(Directory.GetDirectories(path));
 
 
             for (int i = 0; i < Directory.GetDirectories(path).Length; i++)
@@ -74,7 +74,7 @@ namespace Client
                 GetAllFolders(Directory.GetDirectories(path)[i], all);
             }
         }
-=======
+
 
           //  CheckChange(basePath);
         }
@@ -101,7 +101,7 @@ namespace Client
             MessageBox.Show(wct.ToString());
         }
 
->>>>>>> e5ce0c57dc07e53923712ca9d5dc1dbce284875b
+
 
 
         void renameMenuItem_Click(object sender, EventArgs e)

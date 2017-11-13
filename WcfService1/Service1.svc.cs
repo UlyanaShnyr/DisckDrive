@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -14,8 +15,12 @@ namespace WcfService1
 
     public class Service1 : IService1
     {
-        string basePath = @"D:\root\Server\";
+       
+       
 
+        string basePath = @"D:\root\Server\";
+        static string con = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+        MyDrive db = new MyDrive(con);
         public Stream Download(string file)
         {
             MemoryStream stream = new MemoryStream();
@@ -132,5 +137,12 @@ namespace WcfService1
             return allFiles;
         }
 
+        public string Regist(User user)
+        {
+            db.Users.Add(user);
+            db.SaveChanges();
+            return user.Login;
+        }
     }
+   
 }
