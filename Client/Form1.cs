@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ServiceReference1;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,13 +18,30 @@ namespace Client
         ServiceReference1.Service1Client client = new ServiceReference1.Service1Client();
         string basePath = @"D:\root\Client";
         string currentPath;
+        public  User _User;
+        FileSystemWatcher fw;
 
-        
+
         public Form1()
         {
             InitializeComponent();
-            SetListView(basePath);
-            currentPath = basePath;
+            logiIn log = new logiIn(this);
+            log.ShowDialog();
+            this.Hide();
+            if(!Directory.Exists(basePath + "\\" + _User.Login))
+                Directory.CreateDirectory(basePath + "\\" + _User.Login);
+
+
+            currentPath = basePath + "\\" + _User.Login;
+          
+            fw = new FileSystemWatcher(currentPath);
+            fw.IncludeSubdirectories = true;
+            fw.EnableRaisingEvents = true;
+
+            fw.Changed += Fw_Changed;
+            fw.Created += Fw_Created;
+
+            fw.Renamed += Fw_Renamed;
 
             // создаем элементы меню
             ToolStripMenuItem renameMenuItem = new ToolStripMenuItem("Rename");
@@ -31,6 +49,9 @@ namespace Client
             ToolStripMenuItem addFolderMenuItem = new ToolStripMenuItem("AddFolder");
             ToolStripMenuItem addFileMenuItem = new ToolStripMenuItem("AddFile");
 
+
+            Client.Synhronization sync = new Client.Synhronization();
+            //sync.Synh(basePath,currentPath);
             // добавляем элементы в меню
             contextMenuStrip1.Items.AddRange(new[] { renameMenuItem, deleteMenuItem, addFolderMenuItem, addFileMenuItem });
 
@@ -44,22 +65,71 @@ namespace Client
             addFileMenuItem.Click += addFileMenuItem_Click;
 
             SyncFolder();
-        
+            SyncFile();
+
+            SetListView(currentPath);
+        }
+
+        void SyncFile()
+        {
+
+            List<string> allfiles = new List<string>();
+            List<ServerFiles> serverFile = client.SearchFiles(currentPath.Remove(0, basePath.Length)).ToList();
+            GetAllFiles(currentPath, allfiles);
+
+            for (int i = 0; i < serverFile.Count(); i++)
+            {
+                if (!allfiles.Contains(basePath + "\\" + serverFile[i].name))
+                {
+                    if (serverFile[i].files.Length > 0) File.WriteAllBytes(basePath + "\\" + serverFile[i].name, serverFile[i].files);
+
+                }
+            }
+
+            for (int i = 0; i < allfiles.Count; i++)
+            {
+                if (!serverFile.Select(file=>file.name).Contains(allfiles[i].Remove(0, basePath.Length)))
+                {
+                    File.Delete(allfiles[i]);
+                }
+            }
+        }
+
+        void GetAllFiles(string path, List<string> all)
+        {
+            if (Directory.GetFiles(path).Length > 0)
+                all.AddRange(Directory.GetFiles(path));
+
+
+            for (int i = 0; i < Directory.GetDirectories(path).Length; i++)
+            {
+                GetAllFiles(Directory.GetDirectories(path)[i], all);
+            }
+        }
 
         void SyncFolder()
         {
             List<string> all = new List<string>();
             List<string> serverFolder = client.SerchDirectories().ToList();
-            GetAllFolders(basePath, all);
+            GetAllFolders(currentPath, all);
 
             for(int i=0; i < serverFolder.Count(); i++)
             {
-                if (!all.Contains(serverFolder[i]))
+                if (!all.Contains(basePath + "\\" + serverFolder[i]))
                 {
                     Directory.CreateDirectory(basePath+"\\"+serverFolder[i]);
                    
                 }
             }
+
+            for (int i=0; i<all.Count;i++)
+            {
+                if (!serverFolder.Contains(all[i].Remove(0,basePath.Length)))
+                {
+                    Directory.Delete(all[i],true);
+                }
+            }
+
 
         }
 
@@ -77,6 +147,24 @@ namespace Client
 
 
           //  CheckChange(basePath);
+        
+
+        private void Fw_Renamed(object sender, RenamedEventArgs e)
+        {
+           //SetListView(currentPath);
+            MessageBox.Show("gfdg");
+        }
+
+        private void Fw_Created(object sender, FileSystemEventArgs e)
+        {
+            //SetListView(currentPath);
+            MessageBox.Show("Create");
+        }
+
+        private void Fw_Changed(object sender, FileSystemEventArgs e)
+        {
+            MessageBox.Show("Change");
+           // SetListView(currentPath);
         }
 
         void CheckChange(string path)
@@ -114,9 +202,14 @@ namespace Client
         {
             
             var path =currentPath+"\\"+ listView1.SelectedItems[0].Text;
-            MessageBox.Show(path.Remove(0, currentPath.Length));
-            client.Delete(path.Remove(0, currentPath.Length));
-                Directory.Delete(currentPath+"\\"+ listView1.SelectedItems[0].Text);
+           
+            client.Delete(path.Remove(0, basePath.Length));
+            if (Directory.Exists(path))
+                Directory.Delete(currentPath+"\\"+ listView1.SelectedItems[0].Text,true);
+            else
+            {
+                File.Delete(currentPath + "\\" + listView1.SelectedItems[0].Text);
+            }
                 SetListView(currentPath);
         }
 

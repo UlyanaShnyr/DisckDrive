@@ -8,15 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using System.IO;
+using Client.ServiceReference1;
 
 namespace Client
 {
     public partial class logiIn : Form
     {
-        public logiIn()
+        ServiceReference1.Service1Client client = new ServiceReference1.Service1Client();
+        Form1 main;
+        public User _User;
+        string basePath = @"D:\root\Client";
+
+
+        public logiIn(Form1 main)
         {
             InitializeComponent();
+            this.main = main;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -25,31 +33,21 @@ namespace Client
         }
 
         private void ButtonLogin_Click(object sender, EventArgs e)
-        {
+        {           
 
-            //SqlConnection con = new SqlConnection(@"Data Source=ULYANA;Initial Catalog=MyDrive;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            //SqlDataAdapter adapt = new SqlDataAdapter("Select Count(*) From DataLogin Where Username ='" + textBoxLogin.Text + "' and Password ='" + textBoxPassword.Text + "'", con);
-            //DataTable dt = new DataTable();
-            //adapt.Fill(dt);
-            //if (dt.Rows[0][0].ToString() == "1")
-            //{
             this.Hide();
-            Form1 f1 = new Form1();
-            f1.Show();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please Cheack your Login Name and Password");
-            //}
+            var tmp = client.Log(textBoxLogin.Text, textBoxPassword.Text);
 
+            main._User = tmp;      
 
+            main.Show();
 
         }
 
         private void linkLabelGoTotheRegistrationForm_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Hide();
-            Registration reg = new Registration();
+            //this.Hide();
+            Registration reg = new Registration(main);
             reg.Show();
         }
 

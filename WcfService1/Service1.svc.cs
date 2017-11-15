@@ -21,6 +21,7 @@ namespace WcfService1
         string basePath = @"D:\root\Server\";
         static string con = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
         MyDrive db = new MyDrive(con);
+       
         public Stream Download(string file)
         {
             MemoryStream stream = new MemoryStream();
@@ -75,8 +76,13 @@ namespace WcfService1
         {
             if (Directory.Exists(this.basePath + basePath))
             {
-                Directory.Delete(this.basePath + basePath);
+                Directory.Delete(this.basePath + basePath,true);
             }
+            else
+            {
+                File.Delete(this.basePath + basePath);
+            }
+
             return basePath;
         }
 
@@ -121,28 +127,64 @@ namespace WcfService1
             return allDirectories;
         }
 
-        public void AllFilesPath(string path, List<string> allList)
+        public void AllFilesPath(string path, List<ServerFiles> allList)
         {
-            if(Directory.GetFiles(path).Length>0)
-            allList.AddRange(Directory.GetFiles(path.Remove(0,basePath.Length)));
-            for(int i = 0;i < Directory.GetDirectories(path).Length;i++)
+            if(Directory.GetFiles(basePath+path).Length>0)
+            //allList.AddRange(Directory.GetFiles(basePath  + path));
+            for(int i = 0; i < Directory.GetFiles(basePath + path).Length;i++)
+                {
+                    allList.Add(new ServerFiles()
+                    {
+                        name = Directory.GetFiles(basePath + path)[i],
+                        files = File.ReadAllBytes(Directory.GetFiles(basePath + path)[i]),
+                        IsFile = true,
+                        LastChange = File.GetLastWriteTime(Directory.GetFiles(basePath + path)[i])
+                    });
+                }
+            for(int i = 0;i < Directory.GetDirectories(basePath + path).Length;i++)
             {
-                AllFilesPath(Directory.GetDirectories(path)[i], allList);
+                AllFilesPath(Directory.GetDirectories(basePath  + path)[i], allList);
             }
         }
-        public List<string> SearchFiles(string path)
+        public List<ServerFiles> SearchFiles(string path)
         {
-            List<string> allFiles = new List<string>();
-            AllFilesPath(path, allFiles);
-            return allFiles;
+            List<ServerFiles> files = new List<ServerFiles>();
+
+            AllFilesPath(path, files);
+
+            for(int i = 0; i< files.Count; i++)
+            {
+                files[i].name = files[i].name.Remove(0, basePath.Length);
+            }
+            return files;
         }
 
         public string Regist(User user)
         {
+            if (db.Users.Where(usr => usr.Login == user.Login).Count() > 0)
+                return "User with the same login alllready exsist";
+            
             db.Users.Add(user);
             db.SaveChanges();
+            Directory.CreateDirectory(basePath + user.Login);
             return user.Login;
+            
+            
+        }
+
+        public User Log(string login, string password)
+        {
+            var tmp = db.Users.Where(user => user.Login == login && user.Password == password).ToList();
+            if (tmp.Count > 0)
+            {
+                return tmp[0];
+            } 
+            return null;
+
+  
         }
     }
+
+
    
 }

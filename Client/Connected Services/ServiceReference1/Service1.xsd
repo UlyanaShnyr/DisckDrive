@@ -8,4 +8,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="ArrayOfServerFiles">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServerFiles" nillable="true" type="tns:ServerFiles" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServerFiles" nillable="true" type="tns:ArrayOfServerFiles" />
+  <xs:complexType name="ServerFiles">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsFile" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastChange" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="files" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServerFiles" nillable="true" type="tns:ServerFiles" />
 </xs:schema>
